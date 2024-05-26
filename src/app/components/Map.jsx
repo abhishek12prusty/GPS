@@ -1,22 +1,19 @@
-// components/Map.js
+'use client';
 import { MapContainer, TileLayer, Marker, Polyline } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import React, { useMemo } from 'react';
 
 const Map = ({ coordinates }) => {
-  //if (coordinates.length === 0) return null;
+  if (coordinates.length === 0) return null;
+
   const position = coordinates[coordinates.length - 1];
 
- // const polylinePositions = useMemo(() => coordinates.map(coord => [coord.lat, coord.lng]), [coordinates]);
   const polylinePositions = useMemo(() => {
-      if(coordinates.length != 0)
-      {
-        coordinates.map(coord => [coord.lat, coord.lng]);
-      }
-     return null;
-  },[coordinates]);
+    return coordinates.map(coord => [coord.lat, coord.lng]);
+  }, [coordinates]);
+
   return (
-    <MapContainer center={[position.lat, position.lng]} zoom={13} style={{ height: "400px", width: "100%" }}>
+    <MapContainer center={[position.lat, position.lng]} zoom={13} style={{ height: '400px', width: '100%' }}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution="&copy; OpenStreetMap contributors"
