@@ -4,13 +4,18 @@ import 'leaflet/dist/leaflet.css';
 import React, { useMemo } from 'react';
 
 const Map = ({ coordinates }) => {
-  if (coordinates.length === 0) return null;
+  const hasCoordinates = coordinates.length > 0;
 
-  const position = coordinates[coordinates.length - 1];
-
+  // Memoize the polyline positions unconditionally
   const polylinePositions = useMemo(() => {
     return coordinates.map(coord => [coord.lat, coord.lng]);
   }, [coordinates]);
+
+  // Early return after memoizing to ensure hooks are called
+  if (!hasCoordinates) return null;
+
+  const position = coordinates[coordinates.length - 1];
+  
 
   return (
     <MapContainer center={[position.lat, position.lng]} zoom={13} style={{ height: '400px', width: '100%' }}>
