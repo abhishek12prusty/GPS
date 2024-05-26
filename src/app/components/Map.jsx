@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import React, { useMemo } from 'react';
 
 const Map = ({ coordinates }) => {
-  if (coordinates.length === 0) return null;
+  //if (coordinates.length === 0) return null;
   const position = coordinates[coordinates.length - 1];
 
  // const polylinePositions = useMemo(() => coordinates.map(coord => [coord.lat, coord.lng]), [coordinates]);
